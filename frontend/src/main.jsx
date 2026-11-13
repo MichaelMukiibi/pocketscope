@@ -1,3 +1,4 @@
+import Landing from './Landing'
 import { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
@@ -105,7 +106,7 @@ function App() {
             <span className="grid size-10 place-items-center rounded-xl bg-brand text-white">
               <Aperture size={23} />
             </span>
-            PocketScope
+            <a href="/">PocketScope</a>
           </div>
           <div className="flex items-center gap-2 rounded-full border border-line px-3 py-1 text-sm font-medium text-muted">
             <span
@@ -275,6 +276,6 @@ function App() {
 
 createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
-    <App />
+    {window.location.pathname === '/capture' ? <App /> : <Landing />}
   </QueryClientProvider>,
 )

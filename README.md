@@ -11,14 +11,14 @@ pnpm install
 pnpm dev
 ```
 
-Open the URL Vite prints. On a phone, use an HTTPS preview to test the rear-camera picker. Choose an image to try the workflow without a camera.
+Open the URL Vite prints for the landing page. Choose **Try the capture demo** to open the capture workflow. On a phone, use an HTTPS preview to test the rear-camera picker. Choose an image to try the workflow without a camera.
 
 ## Checks and deployment
 
 ```sh
 pnpm format:check
 pnpm build
-pnpm exec wrangler deploy --dry-run
+pnpm --filter @pocketscope/frontend exec wrangler deploy --dry-run
 ```
 
 Run `pnpm format` to apply Prettier. Run `pnpm deploy` with Cloudflare credentials to publish the frontend.

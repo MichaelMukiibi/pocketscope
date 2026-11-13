@@ -1,7 +1,11 @@
 # Architecture
 
-Vite builds a React single-page app. Tailwind CSS defines the layout and color tokens. Cloudflare Workers serves the built assets from `dist/` using `wrangler.jsonc`.
+| Directory            | Role                                                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `frontend/`          | React and Vite landing page at `/` and throat capture demo at `/capture`. Tailwind CSS supplies styling, and Cloudflare Workers serves the build. |
+| `backend/`           | Planned Hono and TypeScript API for screening requests, report generation, and storage.                                                           |
+| `backend/inference/` | Planned FastAPI service packaged in Docker and deployed independently on Render.                                                                  |
 
-The browser receives an image from the device's camera picker or file picker. The preview uses a temporary object URL. Saving writes the file and its capture timestamp to IndexedDB. TanStack Query reads the local capture list and invalidates it after a save or deletion. These operations run regardless of the browser's network status.
+The capture demo previews photos locally and stores saved files with timestamps in IndexedDB. TanStack Query updates the capture list after saves or deletions, including when the open app is offline. Offline startup is pending.
 
-The open app can save and retrieve captures offline. Reloading the app offline is outside the current scope because the app has no service worker. There is no backend for case sync or specialist review.
+The planned API sends a screening image to the inference service. A ResNet with a linear classifier returns scores for supported visible findings. The API passes the findings to Gemma to draft a report, converts the report to PDF, and stores it in a database.
