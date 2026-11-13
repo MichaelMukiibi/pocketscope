@@ -1,6 +1,12 @@
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_FILES)),
+    caches
+      .open(CACHE_NAME)
+      .then((cache) =>
+        cache.addAll(
+          APP_FILES.map((file) => new Request(file, { cache: 'reload' })),
+        ),
+      ),
   )
 })
 
@@ -16,7 +22,8 @@ self.addEventListener('activate', (event) => {
             )
             .map((name) => caches.delete(name)),
         ),
-      ),
+      )
+      .then(() => self.clients.claim()),
   )
 })
 
