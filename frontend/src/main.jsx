@@ -276,6 +276,16 @@ function App() {
 
 createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
-    {window.location.pathname === '/capture' ? <App /> : <Landing />}
+    {window.location.pathname.replace(/\/$/, '') === '/capture' ? (
+      <App />
+    ) : (
+      <Landing />
+    )}
   </QueryClientProvider>,
 )
+
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch((error) => {
+    console.warn('PocketScope offline setup failed', error)
+  })
+}
