@@ -11,6 +11,8 @@
 
 - Install PocketScope as a PWA and reopen the landing page or capture demo offline after the first online visit.
 
+- Check API liveness at GET /health.
+
 ## Planned
 
 - Verify camera capture on a phone with the throat attachment and training model.
