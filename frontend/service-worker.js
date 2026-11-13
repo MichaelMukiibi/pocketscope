@@ -4,9 +4,16 @@ self.addEventListener('install', (event) => {
       .open(CACHE_NAME)
       .then((cache) =>
         cache.addAll(
-          APP_FILES.map((file) => new Request(file, { cache: 'reload' })),
+          APP_FILES.map(
+            (file) =>
+              new Request(file === '/index.html' ? '/' : file, {
+                cache: 'reload',
+                redirect: 'error',
+              }),
+          ),
         ),
-      ),
+      )
+      .then(() => self.skipWaiting()),
   )
 })
 
@@ -35,7 +42,7 @@ self.addEventListener('fetch', (event) => {
   const isAppNavigation =
     request.mode === 'navigate' &&
     ['/', '/capture', '/capture/'].includes(url.pathname)
-  const cacheKey = isAppNavigation ? '/index.html' : url.pathname
+  const cacheKey = isAppNavigation ? '/' : url.pathname
   if (!isAppNavigation && !APP_FILES.includes(cacheKey)) return
 
   event.respondWith(
