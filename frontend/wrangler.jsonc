@@ -1,5 +1,5 @@
 {
-  "name": "pocketscope",
+  "name": "pocketscope-web",
   "compatibility_date": "2026-11-13",
   "assets": {
     "directory": "./dist",
