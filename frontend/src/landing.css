@@ -1,13 +1,21 @@
 .landing {
-  max-width: 76rem;
+  max-width: 78rem;
   margin-inline: auto;
   padding-inline: clamp(1.25rem, 5vw, 4rem);
 }
-.landing-header {
+.landing :focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 5px;
+}
+.landing-header,
+.landing-header nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
+}
+.landing-header {
+  justify-content: space-between;
   padding-block: 1.5rem;
   border-bottom: 1px solid var(--color-line);
 }
@@ -26,11 +34,14 @@
   font-size: 0.9rem;
   font-weight: 650;
 }
+.nav-link:hover {
+  text-decoration: underline;
+}
 .hero {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
   padding-block: clamp(2.5rem, 6vw, 6rem);
 }
 .eyebrow {
@@ -42,96 +53,79 @@
 }
 .hero h1 {
   margin-block: 1rem;
-  max-width: 10ch;
-  font-size: clamp(3rem, 7vw, 6rem);
+  max-width: 13ch;
+  font-size: clamp(2.65rem, 5.5vw, 5rem);
   font-weight: 750;
-  line-height: 0.98;
-  letter-spacing: -0.07em;
+  line-height: 1.02;
+  letter-spacing: -0.06em;
+}
+.hero-description,
+.section-intro,
+.prototype p {
+  color: var(--color-muted);
+  line-height: 1.65;
 }
 .hero-description {
-  max-width: 37ch;
-  color: var(--color-muted);
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  line-height: 1.6;
+  max-width: 45ch;
+  font-size: 1.1rem;
 }
 .hero-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
+  gap: 0.65rem;
+  margin-top: 1.4rem;
   border-radius: 0.7rem;
   background: var(--color-brand);
   color: white;
   padding: 0.85rem 1rem;
   font-weight: 650;
 }
+.hero-link svg {
+  flex-shrink: 0;
+}
 .hero-link:hover {
   background: #0b5141;
 }
-.demo-note {
-  margin-top: 0.75rem;
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+}
+.hero-visual figcaption,
+.demo-note,
+.landing-footer {
   color: var(--color-muted);
   font-size: 0.85rem;
 }
-.hero-visual {
-  display: grid;
-  place-items: center;
-  min-height: 22rem;
-  overflow: hidden;
-  border-radius: 1.75rem;
-  background: radial-gradient(circle at center, #388775, #123e35 72%);
+.hero-visual figcaption,
+.demo-note {
+  margin-top: 0.55rem;
 }
-.device {
-  display: grid;
-  gap: 1rem;
-  width: 11rem;
-  padding: 1rem 0.7rem;
-  border: 2px solid #9dc3b6;
-  border-radius: 1.65rem;
-  background: #f4f8f7;
-  box-shadow: 0 24px 45px #092b25a6;
-}
-.device-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-.device-view {
-  display: grid;
-  min-height: 9rem;
-  place-items: center;
-  border: 1px dashed #6ba99a;
-  border-radius: 0.75rem;
-  background: var(--color-view);
-  color: var(--color-brand);
-}
-.device-shutter {
-  justify-self: center;
-  width: 2rem;
-  height: 2rem;
-  border: 3px solid #c2e2d8;
-  border-radius: 50%;
-  background: var(--color-brand);
-}
-.workflow {
-  padding-block: 2rem 4rem;
+.workflow,
+.prototype {
+  scroll-margin-top: 1rem;
+  padding-block: clamp(2rem, 5vw, 4rem);
   border-top: 1px solid var(--color-line);
 }
-.workflow h2 {
-  font-size: clamp(1.6rem, 4vw, 2.5rem);
+.workflow h2,
+.prototype h2 {
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+}
+.section-intro {
+  max-width: 65ch;
+  margin-top: 0.65rem;
 }
 .workflow ol {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 .workflow li {
-  border-top: 2px solid var(--color-line);
-  padding-block: 1rem;
+  border: 1px solid var(--color-line);
+  border-radius: 1rem;
+  background: white;
+  padding: 1.25rem;
 }
 .workflow li svg {
   color: var(--color-brand);
@@ -141,16 +135,31 @@
   font-weight: 700;
 }
 .workflow li p {
-  max-width: 32ch;
   color: var(--color-muted);
   line-height: 1.55;
 }
-@media (max-width: 650px) {
+.prototype {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 1.5rem 4rem;
+}
+.prototype h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.prototype h2 {
+  margin-bottom: 0.5rem;
+}
+.landing-footer {
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--color-line);
+}
+@media (max-width: 700px) {
   .hero,
-  .workflow ol {
+  .workflow ol,
+  .prototype {
     grid-template-columns: 1fr;
-  }
-  .hero-visual {
-    min-height: 16rem;
   }
 }
