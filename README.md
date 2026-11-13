@@ -23,4 +23,4 @@ pnpm --filter @pocketscope/frontend exec wrangler deploy --dry-run
 
 Run `pnpm format` to apply Prettier. Run `pnpm deploy` with Cloudflare credentials to publish the frontend.
 
-See [architecture](ARCHITECTURE.md) and [features](FEATURES.md) for the current scope.
+See [architecture](ARCHITECTURE.md), [features](FEATURES.md), and [design](DESIGN.md) for the current scope.
