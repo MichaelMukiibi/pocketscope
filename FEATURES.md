@@ -13,6 +13,8 @@
 
 - Check API liveness at GET /health.
 
+- Submit a nose or throat training image to POST /screenings and receive a stub response.
+
 ## Planned
 
 - Verify camera capture on a phone with the throat attachment and training model.
