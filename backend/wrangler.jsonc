@@ -1,0 +1,6 @@
+{
+  "name": "pocketscope-screenings",
+  "main": "src/app.ts",
+  "compatibility_date": "2026-11-13",
+  "previews": {},
+}
