@@ -29,7 +29,7 @@ The response includes the exam and `inference: { "status": "stub", "findings": [
 
 ## Cloudflare Worker
 
-The screening API can run separately from the frontend as the `pocketscope-screenings` Worker. The same Hono app serves `GET /health` and `POST /screenings` in both runtimes.
+The screening API can run separately from the frontend as the `pscope-api` Worker. The same Hono app serves `GET /health` and `POST /screenings` in both runtimes.
 
 From the repository root:
 
@@ -41,4 +41,4 @@ pnpm --filter @pocketscope/backend deploy
 
 For a separate Cloudflare Git-connected Worker, keep the build root at the repository root and set the deploy command to `cd backend && pnpm exec wrangler deploy`. Use `cd backend && pnpm exec wrangler preview` for preview builds.
 
-Use only training images with this stub endpoint. The frontend is not yet connected to the Worker.
+Use only training images with this stub endpoint. The frontend Worker forwards same-origin requests from /api/* to pscope-api via the BACKEND service binding. Deploy pscope-api first in the same Cloudflare account.
