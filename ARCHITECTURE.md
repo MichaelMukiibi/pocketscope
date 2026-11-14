@@ -9,3 +9,5 @@
 The capture demo previews photos locally and stores saved files with timestamps in IndexedDB. TanStack Query updates the capture list after saves or deletions, including when the open app is offline. After the first online visit, the service worker precaches the versioned app shell so both routes can open offline. Capture data stays in IndexedDB.
 
 The planned API sends a screening image to the inference service. A ResNet with a linear classifier returns scores for supported visible findings. The API passes the findings to Gemma to draft a report, converts the report to PDF, and stores it in a database.
+
+The frontend Worker serves static assets and forwards same-origin requests under `/api/` to the `pscope-api` Worker through the `BACKEND` service binding. It checks the browser Origin before forwarding and removes the `/api` prefix. The screening endpoint is available to frontend code at `POST /api/screenings`.
