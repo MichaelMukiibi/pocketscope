@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { bodyLimit } from 'hono/body-limit'
 
 export const app = new Hono()
+const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10]
 const maxImageBytes = 5 * 1024 * 1024
 
 app.get('/health', (context) => context.json({ status: 'ok' }))
@@ -39,13 +40,16 @@ app.post(
       return context.json({ error: 'Image must be at most 5 MiB' }, 413)
     }
 
-    const header = Buffer.from(await image.slice(0, 8).arrayBuffer())
+    const header = new Uint8Array(await image.slice(0, 8).arrayBuffer())
     const isJpeg =
       image.type === 'image/jpeg' &&
-      header.subarray(0, 3).toString('hex') === 'ffd8ff'
+      header[0] === 255 &&
+      header[1] === 216 &&
+      header[2] === 255
     const isPng =
       image.type === 'image/png' &&
-      header.toString('hex') === '89504e470d0a1a0a'
+      header.length === 8 &&
+      header.every((byte, index) => byte === pngSignature[index])
     if (!isJpeg && !isPng) {
       return context.json({ error: 'Upload a JPEG or PNG image' }, 415)
     }
@@ -53,3 +57,5 @@ app.post(
     return context.json({ exam, inference: { status: 'stub', findings: [] } })
   },
 )
+
+export default app

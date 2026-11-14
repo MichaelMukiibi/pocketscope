@@ -6,7 +6,9 @@
     "dev": "node --watch src/server.ts",
     "start": "node src/server.ts",
     "check": "tsc --noEmit",
-    "test": "node --test src/app.test.ts"
+    "test": "node --test src/app.test.ts",
+    "dev:worker": "wrangler dev",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@hono/node-server": "^2.1.8",
@@ -14,6 +16,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "4.161.0"
   }
 }
