@@ -1,7 +1,8 @@
 FROM python:3.12-slim
 WORKDIR /app
+## FastAI learner exports use Plum dispatch objects that require the pure Python release.
 RUN pip install --no-cache-dir torch==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cpu \
-    && pip install --no-cache-dir fastai==2.8.5 fastapi==0.116.1 uvicorn==0.35.0
+    && pip install --no-cache-dir fastai==2.8.5 plum-dispatch==2.9.0 fastapi==0.116.1 uvicorn==0.35.0
 COPY app.py .
 RUN useradd --system inference
 USER inference
